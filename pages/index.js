@@ -2,6 +2,6 @@
 
 export default function Home() {
   return (
-    <div className="text-3xl font-bold underline">test</div>
+    <h1 className="bg-red-500">Test</h1>
   )
 }
