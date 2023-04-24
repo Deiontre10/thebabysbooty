@@ -1,12 +1,14 @@
 import Layout from '@/components/Layout';
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function NewProduct() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
 
-    async function createProduct() {
+    async function createProduct(e) {
+        e.preventDefault();
         const data = { title, description, price };
         await axios.post('/api/products', data)
     }
@@ -20,18 +22,18 @@ export default function NewProduct() {
                     type="text"
                     placeholder="Product name"
                     value={title}
-                    onChange={ev => setTitle(ev.target.value)} />
+                    onChange={e => setTitle(e.target.value)} />
                 <label>Product Description</label>
                 <textarea
                     placeholder="Product description"
                     value={description}
-                    onChange={ev => setDescription(ev.target.value)} />
+                    onChange={e => setDescription(e.target.value)} />
                 <label>Price</label>
                 <input
                     type="number"
                     placeholder="Price"
                     value={price}
-                    onChange={ev => setPrice(ev.target.value)} />
+                    onChange={e => setPrice(e.target.value)} />
                 <button
                     type='sumbit'
                     className='btn-primary'>
