@@ -1,8 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { mongooseConnect } from "@/lib/mongoose";
+import { Product } from "@/models/Product";
+// import { isAdminRequest } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handle(req, res) {
+  const { method } = req;
   await mongooseConnect();
-  await isAdminRequest(req, res);
+  // await isAdminRequest(req, res);
 
   if (method === "GET") {
     if (req.query?.id) {
