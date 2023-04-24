@@ -1,9 +1,45 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export default function handle(req, res) {
-    const { method } = req;
+export default async function handle(req, res) {
+  await mongooseConnect();
+  await isAdminRequest(req, res);
 
-    if (method === "POST") {
-        
+  if (method === "GET") {
+    if (req.query?.id) {
+      res.json(await Product.findOne({ _id: req.query.id }));
+    } else {
+      res.json(await Product.find());
     }
+  }
+
+  if (method === "POST") {
+    const { title, description, price, images, category, properties } =
+      req.body;
+    const productDoc = await Product.create({
+      title,
+      description,
+      price,
+      images,
+      category,
+      properties,
+    });
+    res.json(productDoc);
+  }
+
+  if (method === "PUT") {
+    const { title, description, price, images, category, properties, _id } =
+      req.body;
+    await Product.updateOne(
+      { _id },
+      { title, description, price, images, category, properties }
+    );
+    res.json(true);
+  }
+
+  if (method === "DELETE") {
+    if (req.query?.id) {
+      await Product.deleteOne({ _id: req.query?.id });
+      res.json(true);
+    }
+  }
 }
