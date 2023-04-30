@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import axios from "axios";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -24,14 +24,14 @@ export default function Products() {
         <thead>
           <tr>
             <td>Product Name</td>
-            <td></td>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <tr key={product._id}>
+              <td>{product.title}</td>
               <td>
-                <Link href={`/products/${product._id}`}>
+                <Link href={`/products/edit/${product._id}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -67,7 +67,6 @@ export default function Products() {
                   </svg>
                   Delete
                 </Link>
-                Link
               </td>
             </tr>
           ))}
