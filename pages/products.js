@@ -50,7 +50,7 @@ export default function Products() {
                 </Link>
               </td>
               <td>
-                <Link href={`/products/${product._id}`}>
+                <Link href={`/products/delete/${product._id}`}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
